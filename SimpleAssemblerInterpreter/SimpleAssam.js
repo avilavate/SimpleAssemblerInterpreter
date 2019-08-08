@@ -3,7 +3,8 @@
 function simple_assembler(program) {
     let register;
     program.forEach(instruction => {
-        Interpreter(instruction, register);
+      register=  Interpreter(instruction, register);
+      console.log(register);
     });
 
     /* return a dictionary with the registers */
@@ -11,11 +12,12 @@ function simple_assembler(program) {
 }
 
 function Interpreter(Instruction, register){
-    let Steps=Instruction.split(" ");
-    
-    switch (Steps[0]) {
+   
+   let Step= Instruction.split(" ");
+    switch (Step[0]) { 
         case 'mov':
-            register =Steps[1];
+            let Steps=Instruction.split(" ");
+            register =Steps[2];
             break;
         case 'inc':
             register++;
@@ -31,4 +33,4 @@ function Interpreter(Instruction, register){
     return register;
 }
 
-console.log(simple_assembler(['mov a 5','inc a','dec a','dec a','jnz a -1','inc a']))
+console.log(simple_assembler(['mov a 5','inc a','dec a','dec a','jnz a -1','inc a']));
