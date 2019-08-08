@@ -27,7 +27,7 @@ function Interpreter(Instruction, register, program, index) {
             break;
         case 'jnz':
             let newSteps = Instruction.split(" ");
-            let newInstruction = program[index-newSteps[2]];
+            let newInstruction = program[new Number(index)+new Number(newSteps[2])];
             return Interpreter(newInstruction,register,program);
             break;
         default:
