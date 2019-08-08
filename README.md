@@ -1,5 +1,3 @@
-his is the first part of this kata series. Second part is here.
-
 We want to create a simple interpreter of assembler which will support the following instructions:
 
 mov x y - copies y (either a constant value or the content of a register) into register x
