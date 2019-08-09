@@ -19,7 +19,7 @@ function Interpreter(Instruction, register, program, index) {
     switch (Step[0]) {
         case 'mov':
             let Steps = Instruction.split(" ");
-            register = Number.isInteger (new Number(Steps[2]))?Steps[2]:let Step[2] 
+            register = Number.isInteger (new Number(Steps[2]))?Steps[2]:let Step[2] ;
             break;
         case 'inc':
             register++;
