@@ -19,7 +19,11 @@ function lexicalSymbolExtractor(program) {
 }
 
 function simple_assembler(program) {
+    let symbol=lexicalSymbolExtractor(program);
     let register = {};
+    symbol.forEach(element => {
+        register[element]=undefined;
+    });
 
     program.forEach((instruction, index) => {
 
@@ -28,7 +32,7 @@ function simple_assembler(program) {
     });
 
     /* return a dictionary with the registers */
-    return { 'a': register };
+    //return { 'a': register };
 }
 
 function Interpreter(Instruction, register, program, index) {
@@ -56,6 +60,7 @@ function Interpreter(Instruction, register, program, index) {
     return register;
 }
 
-console.log(simple_assembler(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
+//console.log(simple_assembler(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
 
-console.log(lexicalSymbolExtractor(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
+//console.log(lexicalSymbolExtractor(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
+
