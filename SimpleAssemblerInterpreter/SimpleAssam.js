@@ -47,7 +47,7 @@ function Interpreter(Instruction, register, program, index) {
             break;
         case 'jnz':
             let newSteps = Instruction.split(" ");
-            let newInstruction = program[new Number(index) + new Number(newSteps[2])];
+            let newInstruction = newSteps[1] ? program[new Number(index) + new Number(newSteps[2])]:null;
             return Interpreter(newInstruction, register, program);
             break;
         default:
@@ -56,6 +56,6 @@ function Interpreter(Instruction, register, program, index) {
     return register;
 }
 
-//console.log(simple_assembler(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
+console.log(simple_assembler(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
 
 console.log(lexicalSymbolExtractor(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
