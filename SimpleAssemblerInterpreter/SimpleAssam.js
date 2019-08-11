@@ -46,17 +46,18 @@ function Interpreter(Instruction, register, program, index) {
             let Steps = Instruction.split(" ");
            // register = Number.isInteger(new Number(Steps[2])) ? Steps[2] : let Step[2];
            if( !isNaN(  new Number(Steps[2])) && Object.keys(register).includes(Steps[1])){
-               register[Steps[1]]=Steps[2];
+               register[Steps[1]]= Steps[2];
            }
-           if( Number.isNaN(new Number(Steps[2]) && Object.keys(register).includes(Steps[2]) && Object.keys(register).includes(Steps[1]))){
+           else 
+           if(isNaN(new Number(Steps[2])) && Object.keys(register).includes(Steps[2]) && Object.keys(register).includes(Steps[1])){
                 register[Steps[1]]=register[Steps[2]];
            }
             break;
         case 'inc':
-            register++;
+        //    register++;
             break;
         case 'dec':
-            register--;
+         //   register--;
             break;
         case 'jnz':
             let newSteps = Instruction.split(" ");
