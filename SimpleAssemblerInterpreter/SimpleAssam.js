@@ -27,10 +27,13 @@ function simple_assembler(program) {
 
     program.forEach((instruction, index) => {
 
-        register = Interpreter(instruction, register, program, index);
+        let resultIntermediate = Interpreter(instruction, register, program, index);
+        Object.keys(resultIntermediate).forEach(key=>{
+            register[key]=resultIntermediate[key];
+        });
         // console.log(register);
     });
-
+    return register;
     /* return a dictionary with the registers */
     //return { 'a': register };
 }
@@ -42,7 +45,7 @@ function Interpreter(Instruction, register, program, index) {
         case 'mov':
             let Steps = Instruction.split(" ");
            // register = Number.isInteger(new Number(Steps[2])) ? Steps[2] : let Step[2];
-           if(!Number.isNaN(new Number(Steps[2])) && Object.keys(register).includes(Steps[1])){
+           if( !isNaN(  new Number(Steps[2])) && Object.keys(register).includes(Steps[1])){
                register[Steps[1]]=Steps[2];
            }
            if( Number.isNaN(new Number(Steps[2]) && Object.keys(register).includes(Steps[2]) && Object.keys(register).includes(Steps[1]))){
