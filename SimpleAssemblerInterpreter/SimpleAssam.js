@@ -61,13 +61,14 @@ function Interpreter(Instruction, register, program, index) {
             break;
         case 'dec':
 
-            (Steps[1] && !Number.isNaN(Steps[1]) && Object.keys(register).includes(Steps[1]))
-            register[Steps[1]]-1;
+           if (Steps[1] && !Number.isNaN(Steps[1]) && Object.keys(register).includes(Steps[1]))
+           register[Steps[1]]=register[Steps[1]]-1;
             break;
         case 'jnz':
             let newSteps = Instruction.split(" ");
             let newInstruction = newSteps[1] ? program[new Number(index) + new Number(newSteps[2])] : null;
-            return Interpreter(newInstruction, register, program);
+            let newIndex=new Number(index) + new Number(newSteps[2]);
+            return Interpreter(newInstruction, register, program, newIndex);
             break;
         default:
             break;
@@ -75,7 +76,7 @@ function Interpreter(Instruction, register, program, index) {
     return register;
 }
 
-console.log(simple_assembler(['mov a -10', 'mov b a', 'inc a', 'dec b']));
+console.log(simple_assembler(['mov a 5','inc a','dec a','dec a','jnz a -1', 'inc a']));
 
 //console.log(lexicalSymbolExtractor(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
 
