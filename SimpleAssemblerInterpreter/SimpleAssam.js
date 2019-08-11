@@ -19,9 +19,9 @@ function lexicalSymbolExtractor(program) {
 }
 
 function simple_assembler(program) {
-    let symbol=lexicalSymbolExtractor(program);
+    let symbols=lexicalSymbolExtractor(program);
     let register = {};
-    symbol.forEach(element => {
+    symbols.forEach(element => {
         register[element]=undefined;
     });
 
@@ -42,6 +42,12 @@ function Interpreter(Instruction, register, program, index) {
         case 'mov':
             let Steps = Instruction.split(" ");
            // register = Number.isInteger(new Number(Steps[2])) ? Steps[2] : let Step[2];
+           if(!Number.isNaN(new Number(Steps[2])) && Object.keys(register).includes(Steps[1])){
+               register[Steps[1]]=Steps[2];
+           }
+           if( Number.isNaN(new Number(Steps[2]) && Object.keys(register).includes(Steps[2]) && Object.keys(register).includes(Steps[1]))){
+                register[Steps[1]]=register[Steps[2]];
+           }
             break;
         case 'inc':
             register++;
@@ -60,7 +66,7 @@ function Interpreter(Instruction, register, program, index) {
     return register;
 }
 
-//console.log(simple_assembler(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
+console.log(simple_assembler(['mov a -10', 'mov b a', 'inc a', 'dec b']));
 
 //console.log(lexicalSymbolExtractor(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
 
