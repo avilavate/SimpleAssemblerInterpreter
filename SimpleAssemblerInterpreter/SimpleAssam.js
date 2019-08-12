@@ -68,7 +68,7 @@ function Interpreter(Instruction, register, program, index) {
         case 'jnz':
             let newSteps = Instruction.split(" ");
             let newIndex=new Number(index) + new Number(newSteps[2]);
-            register.index=register[ Steps[1]] !=0?newIndex:undefined;
+            register.index=register[ Steps[1]] !=0 && newIndex<program.length?newIndex:undefined;
             return register;
         default:
             break;
