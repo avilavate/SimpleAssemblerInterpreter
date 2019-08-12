@@ -72,7 +72,7 @@ function Interpreter(Instruction, register, program, index) {
             let newSteps = Instruction.split(" ");
             let newIndex=new Number(index) + new Number(newSteps[2]);
             register.index=register[ Steps[1]] !=0?newIndex:undefined;
-            register.index= register.index>program.length?-1:register.index;
+            register.index= register.index>=program.length?-1:register.index;
             return register;
         default:
             break;
@@ -81,14 +81,32 @@ function Interpreter(Instruction, register, program, index) {
 }
 
 //console.log(simple_assembler(['mov a 5','inc a','dec a','dec a','jnz a -1', 'inc a']));
-console.log(simple_assembler([ 'mov d 100',
-'dec d',
-'mov b d',
-'jnz b -2',
-'inc d',
-'mov a d',
-'jnz 5 10',
-'mov c a' ]));
+console.log(simple_assembler([
+    'mov a 1',
+    'mov b 1 ',
+    'mov d 26 ',
+    'jnz c 2',
+    'jnz 1 5',
+    'mov c 7 ',
+    'inc d',
+    'dec c',
+    'jnz c -2',
+    'mov c a ',
+    'inc a',
+    'dec b',
+    'jnz b -2',
+    'mov b c',
+    'dec d',
+    'jnz d -6',
+    'mov c 16 ',
+    'mov d 17',
+    'inc a',
+    'dec d',
+    'jnz d -2',
+    'dec c',
+    'jnz c -5'
+
+]));
 //console.log(lexicalSymbolExtractor(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
 
 
