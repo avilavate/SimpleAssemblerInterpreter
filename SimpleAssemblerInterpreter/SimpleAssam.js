@@ -50,6 +50,7 @@ register[key] = resultIntermediate[key];
 
 /* return a dictionary with the registers */
     //return { 'a': register };
+   delete register.index;
     return register;
 }
 
@@ -68,7 +69,7 @@ function Interpreter(Instruction, register, program, index) {
             else
                 if (isNaN(new Number(Steps[2])) && Object.keys(register).includes(Steps[2]) && Object.keys(register).includes(Steps[1])) {
                     register[Steps[1]] = register[Steps[2]];
-                    var reset= Object.keys(register).includes(Steps[2])?register[Steps[2]]=0:null ;
+                   // var reset= Object.keys(register).includes(Steps[2])?register[Steps[2]]=0:null ;
                 }
             break;
         case 'inc':
@@ -94,7 +95,7 @@ function Interpreter(Instruction, register, program, index) {
     return register;
 }
 
-console.log(simple_assembler(['mov a 5','inc a','dec a','dec a','jnz a -1', 'inc a']));
-//console.log(simple_assembler(['mov a -10','mov b a','inc a','dec b','jnz a -2']));
-console.log(lexicalSymbolExtractor(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
+//console.log(simple_assembler(['mov a 5','inc a','dec a','dec a','jnz a -1', 'inc a']));
+console.log(simple_assembler(['mov a -10','mov b a','inc a','dec b','jnz a -2']));
+//console.log(lexicalSymbolExtractor(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
 
