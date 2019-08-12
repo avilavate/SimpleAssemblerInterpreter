@@ -43,19 +43,16 @@ function simple_assembler(program) {
 }
 
 function Interpreter(Instruction, register, program, index) {
-     let Steps = Instruction.split(" ");
+    let Steps = Instruction.split(" ");
+    
     switch (Steps[0]) {
         case 'mov':
-
-            // register = Number.isInteger(new Number(Steps[2])) ? Steps[2] : let Step[2];
             if (!isNaN(new Number(Steps[2])) && Object.keys(register).includes(Steps[1])) {
-                register[Steps[1]] = Steps[2];
-                
+                register[Steps[1]] = new Number(Steps[2]);
             }
             else
                 if (isNaN(new Number(Steps[2])) && Object.keys(register).includes(Steps[2]) && Object.keys(register).includes(Steps[1])) {
-                    register[Steps[1]] = register[Steps[2]];
-                   // var reset= Object.keys(register).includes(Steps[2])?register[Steps[2]]=0:null ;
+                    register[Steps[1]] = new Number(register[Steps[2]]);
                 }
             break;
         case 'inc':
@@ -80,6 +77,14 @@ function Interpreter(Instruction, register, program, index) {
 }
 
 //console.log(simple_assembler(['mov a 5','inc a','dec a','dec a','jnz a -1', 'inc a']));
-console.log(simple_assembler(['mov a -10','mov b a','inc a','dec b','jnz a -2']));
+console.log(simple_assembler([ 'mov d 100',
+'dec d',
+'mov b d',
+'jnz b -2',
+'inc d',
+'mov a d',
+'jnz 5 10',
+'mov c a' ]));
 //console.log(lexicalSymbolExtractor(['mov a -10', 'mov b a', 'inc a', 'dec b', 'jnz a -2']));
+
 
