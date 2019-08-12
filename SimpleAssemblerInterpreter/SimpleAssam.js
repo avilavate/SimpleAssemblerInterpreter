@@ -1,4 +1,3 @@
-
 function lexicalSymbolExtractor(program) {
     let symbols = [];
     program.forEach(element => {
@@ -36,28 +35,15 @@ function simple_assembler(program) {
                 Object.keys(resultIntermediate).forEach(key => {
                     register[key] = resultIntermediate[key];
                 });
-                // console.log(register);
-
+             
             } 
-    /*program.forEach((instruction, index) => {
-                                        
-let resultIntermediate = Interpreter(instruction, register, program, index);
-Object.keys(resultIntermediate).forEach(key => {
-register[key] = resultIntermediate[key];
-});
-// console.log(register);
-    
 
-/* return a dictionary with the registers */
-    //return { 'a': register };
    delete register.index;
     return register;
 }
 
 function Interpreter(Instruction, register, program, index) {
-                                        
-    //let Step = Instruction.split(" ");
-    let Steps = Instruction.split(" ");
+     let Steps = Instruction.split(" ");
     switch (Steps[0]) {
         case 'mov':
 
@@ -84,10 +70,8 @@ function Interpreter(Instruction, register, program, index) {
             break;
         case 'jnz':
             let newSteps = Instruction.split(" ");
-           // let newInstruction = newSteps[1] ? program[new Number(index) + new Number(newSteps[2])] : null;
             let newIndex=new Number(index) + new Number(newSteps[2]);
             register.index=register[ Steps[1]] !=0?newIndex:undefined;
-            //return Interpreter(newInstruction, register, program, newIndex);
             return register;
         default:
             break;
