@@ -9,7 +9,6 @@ function lexicalSymbolExtractor(program) {
         }
         if (instruction[0] == 'inc' || instruction[0] === 'dec' && instruction.length == 2) {
             symbols.push(instruction[1]);
-
         }
 
     });
@@ -26,19 +25,23 @@ function simple_assembler(program) {
 
             for (let index = 0; index < program.length; index++) {
                 let resultIntermediate = Interpreter(program[index], register, program, index);
+                if(resultIntermediate.index==-1) break;
                 if (!!resultIntermediate.index) {
                     index = resultIntermediate.index;
                     resultIntermediate.index = undefined;
-
+                    
                     resultIntermediate = Interpreter(program[index], resultIntermediate, program, index);
                 }
                 Object.keys(resultIntermediate).forEach(key => {
-                    register[key] = resultIntermediate[key];
+                    register[key] = resultIntermediate[key]/1;
                 });
              
             } 
 
-   delete register.index;
+    delete register.index;
+    Object.keys(register).forEach(key=>{
+        if(isNaN(register[key])) delete register[key];
+    });
     return register;
 }
 
@@ -68,7 +71,8 @@ function Interpreter(Instruction, register, program, index) {
         case 'jnz':
             let newSteps = Instruction.split(" ");
             let newIndex=new Number(index) + new Number(newSteps[2]);
-            register.index=register[ Steps[1]] !=0 && newIndex<program.length?newIndex:undefined;
+            register.index=register[ Steps[1]] !=0?newIndex:undefined;
+            register.index= register.index>program.length?-1:register.index;
             return register;
         default:
             break;
